@@ -22,6 +22,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    confirmPassword: {
+        type: String,
+        required: true,
+
+    },
+     contactNumber: {
+        type: String,
+        trim: true,
+    },
     accountType: {
         type: String,
         required: true,
@@ -33,11 +42,11 @@ const userSchema = new mongoose.Schema({
         ref: "Profile"
 
     },
-    token:{
-        type:Sting,
+    token: {
+        type: Sting,
     },
-    resetPasswordExpires:{
-        type:Date,
+    resetPasswordExpires: {
+        type: Date,
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
