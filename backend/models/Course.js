@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const courseSchema = new mongoose.Schema({
     courseName: {
         type: String,
@@ -18,11 +17,12 @@ const courseSchema = new mongoose.Schema({
     whatYouWillLearn: {
         type: String,
     },
-    courseContent: [{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Section"
-    }
+    courseContent: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "Section"
+        }
     ],
     ratingAndReviews: [
         {
@@ -33,22 +33,22 @@ const courseSchema = new mongoose.Schema({
     ],
     price: {
         type: String,
+        required:true,
 
     },
     thumbnail: {
-        type: String
+        type: String,
+        required:true,
     },
-    tag: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref: "Tag"
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category"
     },
     studentsEnrolled: {
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     }
-
-
 })
 
 
