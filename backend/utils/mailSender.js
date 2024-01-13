@@ -1,29 +1,29 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
-
-    try {
+    try{
         let transporter = nodemailer.createTransport({
-            host: process.env.MAIL_HOST,
-            auth: {
-                user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
+            host : process.env.MAIL_HOST,
+            auth:{
+                pass : process.env.MAIL_PASS,
+                user : process.env.MAIL_USER,
             }
+
         })
-        const info = await transporter.sendMail({
-            from: 'Shubham Kumar Singh', // sender address
-            to: `${email}`, // list of receivers
-            subject: `${title}`, // Subject line
-            html: `${body}`, // plain text body
-        })
-        console.log(info)
+
+        let info = await transporter.sendMail({
+            from: 'StudyNotion ||  by Shubham',
+            to:`${email}`,
+            subject: `${title}`,
+            html: `${body}`,
+        });
+        console.log(info);
         return info;
 
+    } catch(error) {
+        // console.error(error);
+        console.log(error.message);
     }
-    catch (err) {
-        console.log(err, "error occurred while sending message ")
-    }
-
 }
 
 module.exports = mailSender;
