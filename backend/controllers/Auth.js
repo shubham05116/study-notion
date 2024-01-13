@@ -33,28 +33,19 @@ exports.sendotp = async (req, res) => {
         console.log("OTP GENERATED => ",otp);
 
         //checking... uniqueness of the oTP
-        // let result = await OTP.findOne({otp: otp});
+        let result = await OTP.findOne({otp: otp});
 
-        // while(result){
-        //     otp = otpGenerator.generate(6, { //CHECK THIS IF ERROR OCURR 
-        //         upperCaseAlphabets:false,
-        //         lowerCaseAlphabets:false,
-        //         specialChars:false,
-        //     });
+        while(result){
+            otp = otpGenerator.generate(6, { //CHECK THIS IF ERROR OCURR 
+                upperCaseAlphabets:false,
+                lowerCaseAlphabets:false,
+                specialChars:false,
+            });
 
-        //     result = await OTP.findOne({otp: otp});
-        // }
+            result = await OTP.findOne({otp: otp});
+        }
 
-        const result = await OTP.findOne({ otp: otp });
-		// console.log("Result is Generate OTP Func");
-		console.log("--------------OTP-------------", otp);
-		console.log("Result", result);
-		while (result) {
-			otp = otpGenerator.generate(6, {
-				upperCaseAlphabets: false,
-			});
-		}
-
+       
         //creating... otpPayload
         const otpPayload = {email, otp};
         //creating... an entry in Database for OTP
@@ -65,6 +56,7 @@ exports.sendotp = async (req, res) => {
         res.status(200).json({
             success:true,
             message:"OTP Sended SUCCESSFULLY !!",
+            otp:otp
         })
 
     } catch(error){

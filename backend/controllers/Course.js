@@ -21,17 +21,14 @@ exports.createCourse = async (req, res) => {
       // tag: _tag,
       category,
       status,
-      instructions: _instructions,
     } = req.body
     // Get thumbnail image from request files
     const thumbnail = req.files.thumbnailImage
 
     // Convert the tag and instructions from stringified Array to Array
     // const tag = JSON.parse(_tag)
-    const instructions = JSON.parse(_instructions)
-
+ 
     // console.log("tag", tag)
-    console.log("instructions", instructions)
 
     // Check if any of the required fields are missing
     if (
@@ -41,8 +38,7 @@ exports.createCourse = async (req, res) => {
       !price ||
       // !tag.length ||
       !thumbnail ||
-      !category ||
-      !instructions.length
+      !category 
     ) {
       return res.status(400).json({
         success: false,
@@ -89,7 +85,6 @@ exports.createCourse = async (req, res) => {
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
       status: status,
-      instructions,
     })
 
     // Add the new course to the User Schema of the Instructor
